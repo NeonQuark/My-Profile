@@ -67,4 +67,22 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.fade-in').forEach(element => {
         observer.observe(element);
     });
+
+    // Contact Form to Gmail
+    const contactForm = document.querySelector('.contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const name = contactForm.querySelector('input[name="name"]').value;
+            const message = contactForm.querySelector('textarea[name="message"]').value;
+
+            const subject = encodeURIComponent(`Profile Contact from ${name}`);
+            const body = encodeURIComponent(`Name: ${name}\n\nMessage:\n${message}`);
+
+            const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=itzabhinav0110@gmail.com&su=${subject}&body=${body}`;
+
+            window.open(gmailUrl, '_blank');
+        });
+    }
 });
